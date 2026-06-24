@@ -24,8 +24,17 @@
   .logo{width:96px;height:96px;margin:0 auto 18px;display:block}
   .wordmark{
     font-size:40px;font-weight:800;letter-spacing:1px;
-    background:linear-gradient(90deg,#cfd6e6,#ffffff,#aeb6c6);
-    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    color:#EDF1FA; /* solid fallback — shown if gradient-clip is unsupported */
+  }
+  /* Only apply the gradient-text effect where the browser actually supports
+     clipping a background to text. Otherwise the fallback color above keeps
+     "Nudos" readable (some Android WebViews rendered it black/invisible). */
+  @supports ((-webkit-background-clip:text) or (background-clip:text)){
+    .wordmark{
+      background:linear-gradient(90deg,#cfd6e6,#ffffff,#aeb6c6);
+      -webkit-background-clip:text;background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
   }
   .tag{color:var(--dim);font-size:16px;margin:6px 0 30px}
   .dl{
